@@ -7,15 +7,25 @@ import axios from 'axios';
 // sabe hacer fetch data
 // Siempre debe tener un metodo render
 class AlbumList extends Component {
+  // Class level property
+  state = { albums: [] };
   componentWillMount() {
-    console.log('componentWillMount in album');
+    // setState actualiza el state del componente y hace que haga re render 
+    // SIEMPRE USAR this.setState
+    // NUNCA USAR this.state = {} 
     axios.get('https://rallycoding.herokuapp.com/api/music_albums')
-      .then(response => console.log(response));
+      .then(response => this.setState({ albums: response.data }));
   }
+
+  renderAlbums() {
+    return this.state.albums.map(album => <Text>{album.title}</Text>);
+  }
+
   render() {
+    console.log(this.state.albums);
     return (
       <View>
-        <Text>Album List!</Text>
+        {this.renderAlbums()}
       </View>
     );
   }
