@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { AppRegistry, View } from 'react-native';
 
 // Importar otros componente, component neasting
@@ -7,13 +7,22 @@ import AlbumList from './src/components/AlbumList';
 
 // Crear componente 
 // Text es un componente de React Native para mostrar texto
-const App = () => (
-  // es un self closing tag, cuando el tag esta vacio no se debe poner el tag que cierra
-  <View>
-    <Header headerText={'Albums'} />
-    <AlbumList />
-  </View>
-);
+
+// se debe declarar como una clase para que el hot reload de los componentes
+// hijos funcione
+
+class App extends Component {
+  render() {
+    return (
+      // es un self closing tag, cuando el tag esta vacio no se debe poner el tag que cierra
+      <View style={{ flex: 1 }}>
+        <Header headerText={'Albums'} />
+        <AlbumList />
+      </View>
+    );
+  }
+}
+
 
 // Registrar componente de la aplicacion
 
@@ -32,3 +41,9 @@ AppRegistry.registerComponent('albums', () => App);
 // rm -rf /usr/local/var/run/watchman && brew uninstall watchman && brew install watchman
 
 // Para actualizar se debe hacer el gesto de shake, oprimir ctrl+cmd+z
+
+// si el cmd R no funciona en el simulador puede que la conexion con el teclado se
+// haya perdido, por tal motivo se debe ejecutar SHIFT CMD K
+// luego probar CMD R
+
+// Las herramientas de develop react se sacan con CMD D

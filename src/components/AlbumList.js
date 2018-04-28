@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { ScrollView } from 'react-native';
 import axios from 'axios';
 
+import AlbumDetail from './AlbumDetail';
 // Class Based Component
 // componente mas grande, usa estructura de clase
 // sabe hacer fetch data
@@ -18,15 +19,17 @@ class AlbumList extends Component {
   }
 
   renderAlbums() {
-    return this.state.albums.map(album => <Text>{album.title}</Text>);
+    // key debe ser un elemento unico para que react sepa que cambai en el render
+    return this.state.albums.map(album => 
+      <AlbumDetail key={album.title} currentAlbum={album} />);
   }
 
   render() {
     console.log(this.state.albums);
     return (
-      <View>
+      <ScrollView>
         {this.renderAlbums()}
-      </View>
+      </ScrollView>
     );
   }
 }
